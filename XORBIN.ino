@@ -8,6 +8,9 @@
 #define PAPER_ECHO 3
 #define PLASTIC_TRIG 7
 #define PLASTIC_ECHO 2
+const int inductiveSensor = A0;
+const int capacitiveSensor = A1;
+const int IrSensor = A2;
 
 Servo Gate_Servo;  // create servo object to control a servo
 Servo Pipe_Servo;
@@ -33,13 +36,25 @@ void setup() {
 
 // 0, 70, 160
 void loop() {
-  MetalDetected();
-  delay(2000);
-  PaperDetected();
-  delay(2000);
-  PlasticDetected();
-  delay(2000);
-}
+  int inductiveSensorValue = analogRead(inductiveSensor);
+  delay(10);
+  int capacitiveSensorValue = analogRead(capacitiveSensor);
+  delay(500);
+  int IrSensorValue = analogRead(IrSensor);
+
+    //METAL
+  if (inductiveSensorValue <= 130 && capacitiveSensorValue == 1023) {
+    Serial.println("Metal Detected");
+    MetalDetected();
+    // PLASTIC
+  } else if (capacitiveSensorValue >= 1023 && IrSensorValue >= 1000) {
+    Serial.println("Plastic Detected");
+    PlasticDetected();
+  } else if (inductiveSensorValue >= 1000 && capacitiveSensorValue >= 1000 && IrSensorValue < 50){
+    Serial.println("Paper Detected");
+    PaperDetected();
+  }
+
   // GATE SERVO
   void OpenGate() {
     // Sweep the servo from 0 to 180 degrees
