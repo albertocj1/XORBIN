@@ -1,4 +1,4 @@
-# Arduino Waste Management System
+# XORBIN
 
 This Arduino project manages waste bins using ultrasonic sensors and controls servos to open/close gates for different types of waste (metal, paper, plastic). It also integrates a GSM module to send SMS alerts when bins are full.
 
@@ -8,8 +8,10 @@ This Arduino project manages waste bins using ultrasonic sensors and controls se
 - Ultrasonic sensors (3x)
 - Servo motors (2x)
 - GSM module (e.g., SIM800L)
-- Various resistors and capacitors
 - Breadboard and connecting wires
+- Capacitive Sensor
+- Inductive Sensor
+- IR Sensor
 
 ## Libraries Required
 
@@ -44,11 +46,7 @@ This Arduino project manages waste bins using ultrasonic sensors and controls se
 ## Adjustments
 
 - **Sensor Thresholds:** Adjust distance thresholds in `isBinFull()` function (`6` in `return (distance < 6);`) to fine-tune bin full detection.
-- **SMS Recipient:** Change the recipient number in `sendSMS()` function (`gsm.println("AT+CMGS=\"+639493655314\"");`) to the desired SMS recipient.
-
-## Contributing
-
-Feel free to contribute to the improvement of this project by submitting pull requests.
+- **SMS Recipient:** Change the recipient number in `sendSMS()` function (`gsm.println("AT+CMGS=\"+PhoneNumber\"");`) to the desired SMS recipient.
 
 ## License
 
